@@ -19,7 +19,7 @@ app.get("/test", (req, res) => {
 
 //create route
 app.get("/notes", function(req,res){
-    res.sendFile(path.join(__dirname,"/notes.html"))
+    res.sendFile(path.join(__dirname,"/public/notes.html"))
 })
 
 app.get("/api/notes", function(req,res){
