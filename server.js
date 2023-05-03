@@ -5,14 +5,23 @@ var uuid = require("uuid")
 
 var app = express()
 
+var PORT = process.env.PORT || 3001;
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use("/", express.static(path.join(__dirname, "/")))
+app.use(express.static("public"))
+
+//app.use("/", express.static(path.join(__dirname, "/")))
+
+app.get("/test", (req, res) => {
+    res.send("hello")
+});
+
 //create route
 app.get("/notes", function(req,res){
     res.sendFile(path.join(__dirname,"/notes.html"))
 })
+
 app.get("/api/notes", function(req,res){
     fs.readFile("../db/db.json", "utf-8", function(err,data){
         if(err) throw err
@@ -85,10 +94,12 @@ app.delete("/api/notes/:id", function(req,res){
     })
 
 })
-app.get("/*", function(req,res){
-    res.sendFile(path.join(__dirname,"/index.html"))
-})
+// app.get("/*", function(req,res){
+//     res.sendFile(path.join(__dirname,"/index.html"))
+// })
+
+console.log(PORT)
 // Run Server
-app.listen(8000, "localhost", function(){
+app.listen(PORT, function(){
     console.log("Server Started Running")
 })
