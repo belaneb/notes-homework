@@ -23,7 +23,7 @@ app.get("/notes", function(req,res){
 })
 
 app.get("/api/notes", function(req,res){
-    fs.readFile("../db/db.json", "utf-8", function(err,data){
+    fs.readFile("./db/db.json", "utf-8", function(err,data){
         if(err) throw err
         res.send(data)
     })
@@ -33,7 +33,7 @@ app.post("/api/notes", function(req,res){
     var title = req.body.title
     var text = req.body.text
 
-    fs.readFile("../db/db.json", "utf-8", function(err, data){
+    fs.readFile("./db/db.json", "utf-8", function(err, data){
         if(err) throw err
 
         //store the data from db.json to temporary variable
@@ -56,7 +56,7 @@ app.post("/api/notes", function(req,res){
         temp = JSON.stringify(temp)
 
         //write the new notes to db file
-        fs.writeFileSync("../db/db.json", temp, "utf-8")
+        fs.writeFileSync("./db/db.json", temp, "utf-8")
 
         //return the newly added note
         res.send(temp)
@@ -66,7 +66,7 @@ app.post("/api/notes", function(req,res){
 app.delete("/api/notes/:id", function(req,res){
     var id = req.params.id
 
-    fs.readFile("../db/db.json", "utf-8", function(err, data){
+    fs.readFile("./db/db.json", "utf-8", function(err, data){
         if(err) throw err
 
         //store the data from db.json to temporary variable
@@ -87,7 +87,7 @@ app.delete("/api/notes/:id", function(req,res){
         temp = JSON.stringify(temp)
 
         //write the new notes to db file
-        fs.writeFileSync("../db/db.json", temp, "utf-8")
+        fs.writeFileSync("./db/db.json", temp, "utf-8")
 
         //return the newly added note
         res.send(temp)
